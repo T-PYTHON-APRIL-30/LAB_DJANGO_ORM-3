@@ -1,0 +1,66 @@
+{% extends 'solution/home.html' %}
+{% load static %}
+{% block title %}Blog Reading{% endblock %}
+{% block title2 %}Blog Reading{% endblock %}
+
+{% block content %}
+<div class="container row g-2">
+    <div class=" col-md-6">
+        <h1>{{Blog.title}}</h1>
+    </div>
+    <div class="col-md-6" style="padding-top: 1%;">
+        <a href="{% url 'solution:update_blog' Blog.id %}" class="btn btn-warning">Update Blog</a>
+        <a href="{% url 'solution:delete_blog' Blog.id %}" class="btn btn-danger">Delete Blog</a>
+        
+    </div>
+    <div class="col-12">
+        <img class="rounded-5" style="height: 90%; width: 90%; padding-left: 10%;" src="{{ Blog.image.url }}" />
+    </div>
+    <div class="col-12" style="text-align: center;">
+        <p>{{Blog.context}}</p>
+    </div>
+                
+</div>
+<div class="container">
+    <div class="row">
+        {% for comment in Comments %}
+        <div class="col-4 g-3">
+            <div class="card-deck">
+                <div class="card row">
+                    <div class="card-body col-12">
+                        <h5 class="card-title">{{ comment.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ comment.created_at }}</h6>
+                        <p class="card-text text-center ">{{ comment.content }}.</p>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>  
+        
+
+<div class="container">
+    <form action="{% url 'solution:comment_add' Blog.id %}" method="POST" form class="row g-2">
+        {% csrf_token %} 
+        <div class="col-md-6">>
+            <label for="exampleFormControlInput1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in name" name="name" value="{{Comments.name}}">
+        </div>
+        <div class="col-12">
+           <label for="exampleFormControlInput1" class="form-label">Content</label>
+           <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in content" name="content">{{Comments.content}}</textarea>
+        </div>
+        <div class="col-6 ">
+            <label  for="exampleFormControlInput1" class="form-label">{{Comments.created_at}}</label>
+
+        </div>
+        <div class="col-12">
+            <input type="submit" value="create blog" class="btn btn-primary form-control"/> 
+        </div> 
+    </form>
+</div>
+
+    
+{% endblock %}

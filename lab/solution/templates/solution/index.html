@@ -1,0 +1,27 @@
+{% extends 'solution/home.html' %}
+{% load static %}
+{% block title %} Blogs {% endblock %}
+{% block title2 %} Blogs {% endblock %}
+
+{% block content %}
+<div class="row">
+{% for blog in blogs %}
+{% if blog.is_published == True %}
+<div class="col-4 g-3">
+    <div class="card-deck">
+        <div class="card row">
+            <div class="card-body col-12">
+                <img src="{{ blog.image.url }}" class="card-img-top rounded-20" alt="...">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ blog.publish_date }}</h6>
+                <p class="card-text text-center ">{{ blog.context }}.</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'solution:read_blog' blog.id %}" class="btn btn-primary g">View More</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}    
+{% endfor %}
+{% endblock %}

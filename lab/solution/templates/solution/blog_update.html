@@ -1,0 +1,38 @@
+{% extends 'solution/home.html' %}
+    {% load static %}
+  {% block title %}Blog Updating{% endblock %}
+  {% block title2 %}Blog Updating{% endblock %}
+  {% block content %} 
+<form action="{% url 'solution:update_blog' Blog.id %}" method="POST" form class="row g-2" enctype="multipart/form-data">
+    {% csrf_token %} 
+    <div class="col-md-6">>
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title" value="{{Blog.title}}">
+    </div>
+    <div class="col-md-6">  
+        <label for="exampleFormControlInput1" class="form-label">Published</label>
+        <select class="form-control" aria-label="Default select example" name="is_published">
+            <option value="True"  {% if Blog.is_published == True %} selected {% endif %}>Published</option>
+            <option value="False" {% if Blog.is_published == False %} selected {% endif %}>Not Published</option>
+        </select>
+    </div>
+    <div class="col-12">
+       <label for="exampleFormControlInput1" class="form-label">Context</label>
+       <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="context">{{Blog.context}}</textarea>
+    </div>
+    <div class="col-6">
+        <label for="exampleFormControlInput1" class="form-label">Choose Image</label>
+        <input type="file" name="image" class="form-control" />
+    </div>
+    <div class="col-6 ">
+        <label  for="exampleFormControlInput1" class="form-label">Publish date</label>
+        <input class="d-flex" type="date" name="publish_date" value="{{iso_date}}" />
+       
+    </div>
+    <div class="col-12">
+        <input type="submit" value="create blog" class="btn btn-primary form-control"/> 
+    </div> 
+</form>
+
+    {% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'solution/home.html' %}
+{% load static %}
+{% block title %} Searched Blogs {% endblock %}
+{% block title2 %} Searched Blogs {% endblock %}
+
+{% block content %}
+<h3>Search results for <span class="text-success">{{request.GET.search}}</span></h3>
+<div class="row">
+{% for blog in blogs %}
+<div class="col-4 g-3">
+    <div class="card-deck">
+        <div class="card row">
+            <div class="card-body col-12 rounded-5">
+                <img src="{{ blog.image.url }}" class="card-img-top rounded-5 slim" alt="...">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ blog.publish_date }}</h6>
+                <p class="card-text text-center ">{{ blog.context }}.</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'solution:read_blog' blog.id %}" class="btn btn-primary g">View More</a>
+            </div>
+        </div>
+        
+                
+    </div>
+</div>    
+
+{% endfor %}
+{% endblock %}
