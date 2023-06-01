@@ -1,0 +1,17 @@
+{% extends 'main_app/home.html' %}
+{% load static %}
+
+{% block title %} delete post done{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">Done</h1>
+        <p class="lead">
+            The {{post.title}} is successfully done.
+        </p>
+        <a href="{% url 'main_app:index_page' %}" class="btn btn-primary">Go Home</a>
+    </div>
+</div>
+
+{% endblock %}

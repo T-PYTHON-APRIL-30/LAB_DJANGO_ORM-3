@@ -1,0 +1,16 @@
+{% extends 'main_app/home.html' %}
+
+{% block title %}{{post.title}}{% endblock%}
+
+{% block content %}
+<div class="container d-flex flex-column gap-3" >
+    <h1>{{post.title}}</h1>
+    <img class="rounded-3 w-50  " src="{{ post.image.url }}" />
+    <div class="d-flex justify-content-end align-items-end gap-2">
+        <a href="{% url 'main_app:update_post' post.id %}" class="btn btn-sm btn-outline-secondary">update post</a>
+        <a href="{% url 'main_app:delete_post' post.id %}" class="btn btn-sm btn-outline-secondary">Delete psot</a>
+    </div>    
+    <p>{{post.content}}</p>
+</div>
+    
+{% endblock %}

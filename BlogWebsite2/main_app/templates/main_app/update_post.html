@@ -1,0 +1,45 @@
+{% extends 'main_app/home.html' %}
+
+{% block title %} Update Post {% endblock%}
+
+
+{% block content%}
+<h1>Update post: {{post.title}}</h1>
+<div class="container">
+    <form action="{% url 'main_app:update_post' post.id %}" method="POST"> 
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title" value="{{post.title}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in content" name="content">{{post.content}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Is Published</label>
+            <select class="form-select" aria-label="Default select example" name="is_published">
+                <option value="True"  {% if post.is_published == True %} selected {% endif %}>Published</option>
+                <option value="False" {% if post.is_published == False %} selected {% endif %}>Not Published</option>
+              </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">publish_date</label>
+            <input type="date" name="publish_date" value="{{iso_date}}" />
+        </div>
+        <div class="mb-3 d-flex flex-column gap-2" >
+            <label for="exampleFormControlInput1" class="form-label">Choose Image</label>
+            <img src="{{post.image.url}}" class="w-25 rounded-5">
+            <input type="file" name="image" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Add Post" class="btn btn-primary" />
+        </div>
+    </form>
+
+</div>
+{% endblock %}
