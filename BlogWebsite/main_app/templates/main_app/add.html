@@ -1,0 +1,58 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}Add New Blog{% endblock%}
+
+
+{% block contentt%}
+<h1>Add Blog</h1>
+<div class="container">
+
+    <form action="{% url 'main_app:add' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">title</label>
+            <input  class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Description</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in blog" name="content"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Release Date</label>
+            <input type="date" name="publish_date" />
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Is Published </label>
+            <select class="form-select" aria-label="Default select example" name="is_published">
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Rating</label>
+            <select class="form-select" aria-label="Default select example" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Choose Image</label>
+            <input type="file" name="image" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Create Blog" class="btn btn-primary" />
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

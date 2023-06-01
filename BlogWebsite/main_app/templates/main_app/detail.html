@@ -1,0 +1,67 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}{{blog.title}}{% endblock %}
+
+{% block contentt %}
+<Div class="container justify-content-center align-items-center">
+    <div class="container d-flex flex-column gap-3">
+        <div>
+        <h1>{{blog.title}}</h1>
+        <img src="{{ blog.image.url }}">
+        
+        </div>
+        <div class="d-flex justify-content-center align-items-center gap-2">
+            <a href="{% url 'main_app:update' blog.id %}" class="btn btn-warning">update blog</a>
+            <a href="{% url 'main_app:delete' blog.id %}" class="btn btn-danger">Delete blog</a>
+        </div>
+        <p>{{blog.content}}</p>
+    </div>
+</Div>
+    
+<div class="container d-flex flex-column gap-3">
+    <h2>Reviews</h2>
+    {% for comments in comment %}
+
+    <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1">
+        <h6>{{comments.name}}</h6>
+        <h6>Rating: {{comments.rating}}</h6>
+        <p>{{comments.content}}</p>
+        <p>commnetet at: {{comments.created_at}}</p>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="container mt-3">
+    <h3>Add Review</h3>
+    <form action="{% url 'main_app:review' blog.id %}" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in name" name="name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in comment" name="content"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Rating</label>
+            <select class="form-select" aria-label="Default select example" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="add comment" />
+
+    </form>
+</div>
+    
+{% endblock %}

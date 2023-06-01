@@ -1,0 +1,31 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}best blogs{% endblock %}
+
+{% block contentt %}
+<h1>Welcome to blog website</h1>
+
+<h3>Our Blogs</h3>
+<div class="row">
+    {% for blog in blogs %}
+        <div class="col">
+            <div class="card" >
+                <img src="{{ blog.image.url }}" class="card-img-top rounded-5" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                    <h5>Rating: {{ blog.rating }}</h5>
+                    
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">publish date: {{blog.publish_date}}</div>
+                    </div>
+                </div>    
+                <a href="{% url 'main_app:detail' blog.id %}" class="btn btn-primary">View More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
