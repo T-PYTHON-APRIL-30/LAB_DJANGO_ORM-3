@@ -1,0 +1,49 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %} Update Post {% endblock%}
+
+{% block content%}
+<h1>Update Post: {{post.title}}</h1>
+<div class="container">
+
+    <form action="{% url 'main_app:update_post' post.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title" value="{{post.title}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in content" name="content">{{post.content}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Is Published </label>
+            <select class="form-select" aria-label="Default select example" name="is_published">
+                <option value="True" {% if post.is_published == True %} selected {% endif %}>Yes</option>
+                <option value="False" {% if post.is_published == False %} selected {% endif %}>No</option>
+
+              </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Add an Image</label>
+            <img src="{{post.image.url}}" width="100"/>
+            <input type="file" name="image"/>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Publish Date</label>
+            <input type="datetime-local" name="publish_date" value="{{iso_date}}" />
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Update Post" class="btn btn-primary" />
+        </div>
+
+
+    </form>
+
+</div>
+{% endblock %}

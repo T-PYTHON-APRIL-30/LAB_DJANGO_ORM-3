@@ -1,0 +1,53 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}{{post.title}}{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>{{post.title}}</h1>
+    <p>{{post.content}}</p>
+    <a href="{% url 'main_app:update_post' post.id %}" class="btn btn-primary">Update Post</a>
+    <a href="{% url 'main_app:delete_post' post.id %}" class="btn btn-danger">Delete Post</a>
+
+</div>
+    
+
+<div class="container d-flex flex-column gap-3">
+    <h2>Comments</h2>
+    {% for comment in comments %}
+
+    <div class="d-flex flex-column p-3 border border-1 rounded-3 gap-1">
+        <h6>{{comment.name}}</h6>
+        <p>{{comment.content}}</p>
+        <p>{{comment.created_at}}</p>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="container mt-2">
+    <h3>Add Comment</h3>
+    <form action="{% url 'main_app:add_comment' post.id %}" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-1">
+            <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="Type your Comment" name="content"></textarea>
+        </div>
+
+
+        <input type="submit" class="btn btn-primary" value="Add Comment" />
+
+    </form>
+</div>
+
+
+
+
+{% endblock %}

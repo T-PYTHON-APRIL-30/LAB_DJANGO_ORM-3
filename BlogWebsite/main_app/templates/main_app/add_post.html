@@ -1,0 +1,48 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %} Add New Post {% endblock%}
+
+{% block content %}
+<h1>Add Post</h1>
+<div class="container">
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in content" name="content"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Is Published </label>
+            <select class="form-select" aria-label="Default select example" name="is_published">
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+
+              </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Add an Image</label>
+            <input type="file" name="image"/>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Publish Date</label>
+            <input type="date" name="publish_date" />
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Post" class="btn btn-primary" />
+        </div>
+
+
+    </form>
+
+</div>
+{% endblock%}

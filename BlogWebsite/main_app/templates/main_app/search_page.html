@@ -1,0 +1,31 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %} Show Posts {% endblock%}
+
+{% block content %}
+<h1>Here Are All The Posts</h1>
+<h3>Search results for <span class="text-success">{{request.GET.search}}</span></h3>
+
+
+<div class="row">
+    {% for post in posts %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">is_published: {{post.is_published}}</div>
+                        <div class="col">{{post.publish_date}}</div>
+                    </div>
+                </div>    
+                <a href="{% url 'main_app:post_detail' post.id %}" class="btn btn-primary">View More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
