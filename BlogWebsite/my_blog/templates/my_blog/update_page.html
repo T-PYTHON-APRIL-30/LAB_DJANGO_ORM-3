@@ -1,0 +1,41 @@
+{% extends 'my_blog/base.html' %}
+
+{% block title %} Update Blog {% endblock%}
+
+{% block content%}
+<h1>Update Blog</h1>
+<div class="container">
+
+    <form action="{% url 'my_blog:update_page' blog.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title" value="{{blog.title}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Description</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="content" >{{blog.content}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Is Published</label>
+            <select class="form-select" aria-label="Default select example" name="is_published">
+                <option value="True"  {% if blog.is_published == True %} selected {% endif %}>Published</option>
+                <option value="False" {% if blog.is_published == False %} selected {% endif %}>Not Published</option>
+              </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Upload Image</label>
+            <img src="{{ blog.image.url }}" class="card-img-top rounded-5 " style="width: 120px; height:auto ;" alt="...">
+            <input type="file" name="image" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Update Blog" class="btn btn-primary" />
+            <a href="{% url 'my_blog:detail_page' blog.id %}" class="btn btn-warning">Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

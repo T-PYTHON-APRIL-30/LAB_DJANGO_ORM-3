@@ -1,0 +1,24 @@
+{% extends 'my_blog/base.html' %}
+
+{% block title %}Search Page{% endblock %}
+
+{% block content %}
+
+<h3>Search results for <span class="text-success">{{request.GET.search}}</span></h3>
+<div class="row">
+    {% for blog in blogs %}
+    <div class="col-4 g-3">
+        <div class="card" >
+            <div class="card-body">
+                <img src="{{ blog.image.url }}" class="card-img-top rounded-5" alt="...">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <a href="{% url 'my_blog:detail_page' blog.id %}" class="btn btn-info">More Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
