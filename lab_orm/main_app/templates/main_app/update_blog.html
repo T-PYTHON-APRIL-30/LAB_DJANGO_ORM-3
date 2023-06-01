@@ -1,0 +1,55 @@
+{% extends 'main_app/base.html' %}
+<!--  -->
+{% block title%}update Blog{%endblock%}
+<!--  -->
+{% block content %}
+<h1>Welcome</h1>
+<form action="{% url 'main_app:update_blog' blog.id %}" method="POST" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Tittle</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      name="Title"
+      value="{{blog.Title}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Content</label>
+    <textarea
+      class="form-control"
+      id="exampleInputPassword1"
+      name="Content" 
+    >{{blog.Content}}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Choose Image</label>
+    <input type="file" name="image" class="form-control"  />
+</div>
+
+  <div class="mb-4">
+    <label for="exampleFormControlInput1" class="form-label">Is Published</label>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      name="is_published"
+    >
+      <option value="True" {% if blog.is_published == True  %} selected {% endif %}>Public</option>
+      <option value="False" {% if blog.is_published == False  %} selected {% endif %}>Private</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"
+      >publish Date</label
+    >
+    <input type="date" name="publish_date" value="{{iso_date}}"/>
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'main_app/base.html' %}
+<!--  -->
+{% block title%}Search Blog{%endblock%} {% block content %}
+
+<!--  -->
+<div class="container">
+  <h1 class="mb-4">
+    Search results for <span class="text-success">{{request.GET.search}}</span>
+  </h1>
+  <div class="row">
+    {%for blg in blog%}
+    <!--  -->
+    <div class="col-2">
+      <div class="card mb-2">
+        <img
+          src="{{ blg.image.url }}"
+          class="card-img-top rounded-5"
+          alt="..."
+        />
+        <div class="card-header">{{blg.Title}}</div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">{{blg.Content}}</h5> -->
+          <!-- <p class="card-text">{{blg.is_published}}</p> -->
+          <p class="card-text">{{blg.publish_date}}</p>
+
+          <a
+            href="{% url 'main_app:blog_detial' blg.id %}"
+            class="btn btn-primary"
+            >See the Content</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!--  -->
+<!--  -->
+{% endblock %}

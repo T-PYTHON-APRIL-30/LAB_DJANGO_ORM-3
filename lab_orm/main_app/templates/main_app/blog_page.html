@@ -1,0 +1,33 @@
+{% extends 'main_app/base.html' %}
+<!--  -->
+
+{% block content %}
+
+<!--  -->
+<h1 class="mb-4">Welcome to Blog</h1>
+<div class="row">
+  {%for blg in blog%}
+  <!--  -->
+  <div class="col-2 g-3">
+    <div class="card mb-2 rounded-5">
+      <img src="{{ blg.image.url }}" class="card-img-top rounded-5" alt="..." />
+
+      <div class="card-header">{{blg.Title}}</div>
+      <div class="card-body">
+        <!-- <h5 class="card-title">{{blg.Content}}</h5> -->
+        <!-- <p class="card-text">{{blg.is_published}}</p> -->
+        <p class="card-text">{{blg.publish_date}}</p>
+        <a
+          href="{% url 'main_app:blog_detial' blg.id %}"
+          class="btn btn-primary"
+          >See the Content</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!--  -->
+<!--  -->
+{% endblock %}

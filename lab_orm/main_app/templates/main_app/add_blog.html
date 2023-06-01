@@ -1,0 +1,55 @@
+{% extends 'main_app/base.html' %}
+<!--  -->
+{% block title%}add Blog{%endblock%}
+<!--  -->
+{% block content %}
+<h1>Welcome to add page</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Tittle</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      name="Title"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Content</label>
+    <textarea
+      class="form-control"
+      id="exampleInputPassword1"
+      name="Content"
+    ></textarea>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Choose Image</label
+      >
+      <input type="file" name="image" class="form-control" />
+    </div>
+  </div>
+  <div class="mb-4">
+    <label for="exampleFormControlInput1" class="form-label"
+      >Is Published</label
+    >
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      name="is_published"
+    >
+      <option value="True">Public</option>
+      <option value="False">Private</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"
+      >publish Date</label
+    >
+    <input type="date" name="publish_date" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
