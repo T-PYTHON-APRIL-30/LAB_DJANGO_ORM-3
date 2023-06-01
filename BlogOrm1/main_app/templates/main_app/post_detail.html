@@ -1,0 +1,47 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}{{post.title}}{% endblock%}
+
+{% block content %}
+<div class="container">
+    <img src="{{post.images.url}}" name="image">
+    <h1>{{post.title}}</h1>
+    <a href="{% url 'main_app:update_post' post.id %}" class="btn btn-warning">update post</a>
+    <a href="{% url 'main_app:delete_post' post.id %}" class="btn btn-danger">Delete post</a>
+    <p>{{post.description}}</p>
+</div>
+<div class="container d-flex flex-column gap-3">
+    <h2>Reviews</h2>
+    {% for comment in comments %}
+
+        <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1">
+            <h6>{{comment.name}}</h6>
+            <p>{{comment.content}}</p>
+            <p>{{comment.created_at}}</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="container mt-3">
+    <h3>Add Review</h3>
+    <form action="{% url 'main_app:add_review' post.id %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"> Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in your name" name="name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in " name="content"></textarea>
+        </div>
+
+        <input type="submit" class="btn btn-primary" />
+
+    </form>
+</div>
+
+    
+{% endblock %}
