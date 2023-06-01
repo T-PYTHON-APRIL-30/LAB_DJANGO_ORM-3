@@ -9,7 +9,7 @@ class Blog(models.Model):
     is_published = models.BooleanField(default=True)
     publish_date = models.DateTimeField(auto_now=True)
 
-class Review(models.Model):
+class Comments(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     content = models.TextField()

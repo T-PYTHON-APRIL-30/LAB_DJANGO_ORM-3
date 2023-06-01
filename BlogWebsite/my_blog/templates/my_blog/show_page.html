@@ -13,7 +13,7 @@
             <div class="card-body">
                 <img src="{{ blog.image.url }}" class="card-img-top rounded-5" alt="...">
                 <h5 class="card-title">{{ blog.title }}</h5>
-    
+                <p class="card-text">{{blog.publish_date}}
                 <a href="{% url 'my_blog:detail_page' blog.id %}" class="btn btn-info">More Details</a>
             </div>
         </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest,HttpResponseNotFound
-from .models import Blog , Review
+from .models import Blog , Comments
 # Create your views here.
 
 def show_page(request:HttpRequest):
@@ -12,7 +12,11 @@ def show_page(request:HttpRequest):
 def add_page(request:HttpRequest):
 
     if request.method == "POST":
-        new_blog = Blog(title=request.POST["title"], content=request.POST["content"],is_published=request.POST["is_published"], image=request.FILES["image"])
+        
+        if "image" in request.FILES:
+            new_blog = Blog(title=request.POST["title"], content=request.POST["content"],is_published=request.POST["is_published"], image=request.FILES["image"])
+        else:
+            new_blog = Blog(title=request.POST["title"], content=request.POST["content"],is_published=request.POST["is_published"])
         new_blog.save()
         return redirect("my_blog:show_page")
     
@@ -22,7 +26,7 @@ def detail_page(request:HttpRequest, blog_id):
     
     try:
         blog = Blog.objects.get( id = blog_id )
-        comments = Review.objects.filter(blog=blog)
+        comments = Comments.objects.filter(blog=blog)
     except:
         return render(request, 'my_blog/not_found.html') #Or this call: return HttpResponseNotFound("404")
 
@@ -63,8 +67,8 @@ def add_review(request:HttpRequest, blog_id):
 
     if request.method == "POST":
         blog_object = Blog.objects.get(id=blog_id)
-        new_review = Review(blog=blog_object, name=request.POST["name"], content=request.POST["content"])
-        new_review.save()
+        new_comments = Comments(blog=blog_object, name=request.POST["name"], content=request.POST["content"])
+        new_comments.save()
 
     
     return redirect("my_blog:detail_page", blog_id=blog_id)
