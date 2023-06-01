@@ -13,4 +13,38 @@
     <p>{{post.content}}</p>
 </div>
     
+<div class="container d-flex flex-column gap-3">
+    <h2>Post Reviews</h2>
+    {% for comment in comments %}
+
+    <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1">
+        <h6>{{comment.name}}</h6>
+        <p>{{comment.comment}}</p>
+        <p>{{comment.created_at}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container mt-3">
+    <h3>Add Review</h3>
+    <form action="{% url 'main_app:add_review' post.id %}" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">comment</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="comment"></textarea>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="add comment" />
+
+    </form>
+</div>
+
+
 {% endblock %}
+

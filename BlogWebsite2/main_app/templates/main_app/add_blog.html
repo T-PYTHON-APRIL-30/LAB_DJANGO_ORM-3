@@ -10,7 +10,7 @@
 <h1>Add Post</h1>
 <div class="container">
 <!-- احط فيه رابط الصفحة الي ابغى اوجه له البيانات -->
-    <form action="" method="POST"> 
+    <form action="" method="POST" enctype="multipart/form-data"> 
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Title</label>

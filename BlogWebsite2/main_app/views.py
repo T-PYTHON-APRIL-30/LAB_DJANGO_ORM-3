@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import Post
+from .models import Post,Review
 
 # Create your views here.
 
@@ -29,10 +29,20 @@ def not_found(request:HttpRequest):
 def post_detail(request:HttpRequest, post_id):
     try:
         post = Post.objects.get(id= post_id)
+        comments = Review.objects.filter(post=post)
     except:
         return render(request, 'main_app/not_found.html')
+    
+    return render(request, "main_app/post_detail.html", {"post" : post ,"comments":comments})
 
-    return render(request, "main_app/post_detail.html", {"post" : post})
+
+def add_review(request:HttpRequest, post_id):
+
+    if request.method == "POST":
+        post_object = Post.objects.get(id=post_id)
+        new_review = Review(post=post_object, name=request.POST["name"], comment=request.POST["comment"])
+        new_review.save()
+    return redirect("main_app:post_detail", post_id=post_id)
 
 
 def update_post(request:HttpRequest, post_id):
