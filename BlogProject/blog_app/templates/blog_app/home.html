@@ -1,0 +1,28 @@
+{%extends 'blog_app/base.html'%}
+{%load static%}
+
+{% block title %} Adventurous lifestyle {% endblock%}
+
+{% block content%}
+
+<h3 style="margin-bottom:50px;">View Our Blogs</h3>
+<div class="row">
+    {% for blog in blogs %}
+        <div class="col-4 g-3">
+            <div class="card">
+                <img src="{{blog.image.url}}" class="card-img-top" alt="..." style="width: 414px; height: 300px;"> 
+                <div class="card-body">
+                <h5 class="card-title"> {{ blog.title }}</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">{{blog.publish_date}}</div>
+                    </div>
+                </div>    
+                <a href="{% url 'blog_app:read_blog' blog.id %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

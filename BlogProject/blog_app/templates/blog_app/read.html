@@ -1,0 +1,51 @@
+{%extends 'blog_app/base.html'%}
+
+{% block title %}{{blog.title}}{% endblock%}
+
+{% block content %}
+<div class="container d-flex justify-content-around">
+    <div class="col1">
+        <h1>{{blog.title}}</h1>
+        <h5>{{blog.publish_date}}</h5>
+        <p style="padding: 25px;">{{blog.content}}</p>
+        <a href="{% url 'blog_app:update_blog' blog.id %}" class="btn btn-warning" style="margin: 0px 20px; float: right;">Update Blog</a>
+        <a href="{% url 'blog_app:delete_blog' blog.id %}" class="btn btn-danger" style="float: right;">Delete Blog</a>
+    </div>  
+    <div class="col2">
+        <img class="rounded-5" src="{{ blog.image.url }}" style="height: 480px; width: 480px;" />
+    </div>
+</div>
+
+
+<div class="sec_container d-flex flex-column gap-3">
+    <h1>View Reviews</h1>
+    {% for review in reviews %}
+    <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1">
+        <h6>{{review.name}}</h6>
+        <p>{{review.content}}</p>
+        <p>{{review.created_at}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container mt-3">
+    <h1>Add Your Review</h1>
+    <form action="{% url 'blog_app:add_review' blog.id %}" method="POST">
+        {%csrf_token%}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type a your name" name="name">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="Type Your review" name="content"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Post Review" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+{% endblock %}
