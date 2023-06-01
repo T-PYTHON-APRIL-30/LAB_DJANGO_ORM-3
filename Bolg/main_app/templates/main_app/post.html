@@ -1,0 +1,36 @@
+{% extends 'main_app/index.html' %}
+
+{% block content %}
+    <h3 class="mb-3 px-4 py-5 my-5">Adding a Blog</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3 px-4">
+            <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="title">
+        </div>
+
+        <div class="input-group mb-3 px-4">
+            <span class="input-group-text" id="inputGroup-sizing-default">Content</span>
+            <textarea type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="content"></textarea>
+        </div>
+
+        <div class="px-4 py-5">
+            <div class="form-check">
+                <input value="True" class="form-check-input" type="radio" name="is_published" id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Public
+                </label>
+            </div>
+            <div class="form-check">
+                <input value="False" class="form-check-input" type="radio" name="is_published" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Privet
+                </label>
+            </div>
+        </div>
+          
+        <div class="px-4 py-5 justify-content-end align-items-center">
+            <input type="submit" value="Add Blog" class="btn btn-sm btn-outline-primary">
+        </div>
+    </form>
+{% endblock %}

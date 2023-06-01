@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %} MyBlog {% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <header class="blog-header lh-1 py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                    <div class="col-4 pt-1">
+                        <a class="link-secondary" href="{% url 'main_app:home' %}">Home</a>
+                    </div>
+                    <div class="col-4 text-center pt-1">
+                        <strong><a class="blog-header-logo text-body-emphasis fs-1" href="{% url 'main_app:home' %}">MyBlog</a></strong>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end align-items-center">
+                        <form action="{% url 'main_app:search_page' %}" method="GET" class="col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                            <input type="search" name="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                        </form>
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'main_app:post_page' %}">Add Blog</a>
+                    </div>
+                </div>
+            </header>
+
+            {% block content %}
+            {% endblock %}
+
+            <footer class="blog-footer text-center pt-1">
+                <hr>
+                <p>
+                    Blog page built  by 
+                    <a href="https://github.com/Yousef-Alsaadan" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                    Yousef-Alsaadan
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                        Back to top
+                    </a>
+                </p>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    </body>
+</html>
