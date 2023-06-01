@@ -1,0 +1,49 @@
+{% extends 'main_app/base.html' %}
+
+{%load static%}
+
+{%block title%} Posts Page {%endblock%}
+
+{%block content%}
+
+
+<div class="container-fluid">
+    <main class="tm-main">
+        <form action="" method="POST" class="mb-5 tm-comment-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="tm-color-primary tm-post-title mb-4">New Post</h2>
+            <div class="mb-4">
+                <label for="exampleFormControlInput1" class="form-label">Title</label>
+                <input class="form-control" name="title" type="text">
+            </div>
+            <div class="mb-4">
+                <label for="exampleFormControlInput1" class="form-label">Post content:</label>
+                <textarea class="form-control" id="exampleFormControlInput1" placeholder="Write your post here." name="content"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Do you want to publish your post?</label>
+                <select class="form-control" aria-label="Default select example" name="is_published">
+                    <option class="form-control" value="True">True</option>
+                    <option class="form-control" value="False">False</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="birthdaytime" class="form-label">choose image:</label>
+                <input class="form-control" type="file" name="image">
+            </div>
+
+            <div class="mb-3">
+                <label for="birthdaytime" class="form-label">Date of publish:</label>
+                <input class="form-control" type="datetime-local" name="publish_date">
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Submit" class="tm-btn tm-btn-primary tm-btn-small"/>
+            </div>
+        </form>
+    </main>
+</div>
+
+
+
+{%endblock%}

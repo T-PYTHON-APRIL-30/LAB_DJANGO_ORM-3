@@ -1,0 +1,71 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{%block title%}{{post.title}}{%endblock%}
+
+{% block content %}
+<div class="container">
+    <!-- Post preview-->
+    <div class="post-preview">
+            <div style ="display:flex; flex-direction:column;">
+
+                <img src="{{ post.image.url }}" class="rounded float-start" alt="image" style="max-width: 50%;">
+
+                <br> <br>
+
+                <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{post.title}}</h2>
+            
+                <p class="tm-pt-30">
+                    {{post.content}}
+                </p>
+                <div class="d-flex justify-content-between tm-pt-45">
+                
+                <span class="tm-color-primary"> Published date: {{post.publish_date}} </span>
+                <div style="display:flex; flex-direction:row; row-gap:space-evenly;">
+        
+                </div>
+                <span> <a href="{% url 'main_app:updatePage' post.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">update post</a> </span>
+                <span> <a href="{% url 'main_app:deletePost' post.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">delete post</a> </span>
+            </div>
+
+    </div>
+    <br> <br>
+    
+<br> <br>
+</div>
+
+    <div class="container d-flex flex-column gap-3">
+        <h2>Reviews</h2>
+        {% for comment in comments %}
+
+        <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1">
+            <h6>{{comment.name}}</h6>
+            <p>{{comment.comment}}</p>
+            <p>{{comment.createdAt}}</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="container mt-3">
+        <h3>Add Review</h3>
+        <form action="{% url 'main_app:addReview' post.id %}" method="POST">
+            {% csrf_token %}
+    
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your name." name="name" />
+            </div>
+    
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">your Comment</label>
+                <textarea class="form-control" id="exampleFormControlInput1" placeholder="Write your comment here." name="content"></textarea>
+            </div>
+
+            <input type="submit" class="btn btn-secondary" value="Add Review" />
+
+        </form>
+</div>
+    
+{% endblock %}

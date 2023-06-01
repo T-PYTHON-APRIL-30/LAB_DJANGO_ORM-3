@@ -1,0 +1,38 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{%block title%} Search page{%endblock%}
+
+{%block content%}
+
+<div class="container px-4 px-lg-5">
+    <h3>Search results for <span class="text-success">{{request.GET.search}}:</span></h3>
+
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+        {% for post in posts %}
+             {% if post.is_published == True %}
+                <!-- Post preview-->
+                <div class="post-preview">
+                    
+                    <div style ="display:flex; flex-direction:column;">
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{post.title}}</h2>
+                    
+                        <div class="d-flex justify-content-between tm-pt-45">
+                        
+                        <span class="tm-color-primary"> published date: {{post.publish_date}} </span>
+                        <a href="{% url 'main_app:detailsPage' post.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">More Details</a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                {%endif%}
+        {% endfor %}
+     
+    </div>
+
+
+ {%endblock%}
