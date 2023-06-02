@@ -1,0 +1,46 @@
+{% extends 'main_app/index.html' %}
+
+{% block body %}
+<div class="container">
+    <h1>{{iblog.title}}</h1> 
+    <br>
+    <p>{{iblog.Content}}</p>
+
+    <br/>
+    <div class="container d-flex flex-column gap-3">
+        <h2 style="text-align: center;">Comments</h2>
+        {% for comment in comments %}
+    
+        <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1" style="width: 60%; align-self: center;"> 
+            <h6>{{comment.name}}</h6>
+            <p>{{comment.content}}</p>
+            <p>{{comment.created_at}}</p>
+        </div>
+    
+        {% endfor %}
+    
+    </div>
+    <div class="container mt-3 mb-3" style="background-color: rgb(242, 249, 255); width: 50%;">
+        <h3>Add Comment</h3>
+        <form action="{% url 'main_app:add_comment' iblog.id %}" method="POST"  style="align-items: center; display: flex;">
+            {% csrf_token %}
+    
+            <div class="mb-3" style="width: 50%; margin-right: 60px;">
+                <label for="exampleFormControlInput1" class="form-label"> Name</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" name="name">
+                    <br>
+                <label for="exampleFormControlInput1" class="form-label">Content</label>
+                <textarea class="form-control" id="exampleFormControlInput1" placeholder="comments" name="content"></textarea>
+            </div>
+    
+        
+    
+            <input type="submit" class="btn btn-primary"  value="add comment">
+    
+        </form>
+    </div>
+
+
+   
+{% endblock body %}
+

@@ -1,0 +1,49 @@
+{% extends 'main_app/index.html' %}
+
+{% block body %}
+<div class="container mt-3">
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="fill in title" name="title" value="{{iblog.title}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlInput1" placeholder="fill in Content" name="Content">{{iblog.Content}}</textarea>
+        </div>
+        <label for="exampleFormControlInput1" class="form-label">is published</label>
+        <div class="form-check">
+         
+            <input class="form-check-input" type="radio" name="is_published" id="exampleRadios1" value="0" {% if iblog.is_published == False %} checked {% endif %}>
+            <label class="form-check-label" for="exampleRadios1">
+              no
+            </label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="is_published" id="exampleRadios2" value="1"{% if iblog.is_published == True %} checked {% endif %}>
+            <label class="form-check-label" for="exampleRadios2">
+              yes
+            </label>
+          </div>
+          <div class="mb-3">
+
+            <img src=" {{ iblog.image.url }}" style="width: 300px;"/>
+            <label for="exampleFormControlInput1" class="form-label">Choose Image</label>
+            <input type="file" name="image" placeholder="please enter url" class="form-control" value="{{iblog.image}}" >
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">publish Date</label>
+            <input type="date" name="publish_date" value="{{iso_date}}"/>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit"   id="submit"value="edit blog" class="btn btn-primary" />
+        </div>
+    </form>
+
+ 
+</div>
+{% endblock body %}
