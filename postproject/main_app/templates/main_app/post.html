@@ -1,0 +1,92 @@
+{% extends 'main_app/base.html' %}
+{%load static%}
+{%block content%}
+<div class="container-fluid">
+<main class="tm-main">
+    <!-- Search form -->
+    
+    <div class="row tm-row">
+    
+        <div class="col-12">
+            <hr class="tm-hr-primary tm-mb-55">
+            <!-- Video player 1422x800 -->
+                                <div class="tm-post-link-inner">
+                                        <img src="{{post_detail1.img.url}}" alt="Image" class="img-fluid">
+                                </div>
+        </div>
+    </div>
+    <div class="row tm-row">
+        <div class="col-lg-8 tm-post-col">
+            <div class="tm-post-full">
+                <div class="mb-4">
+                    <h2 class="pt-2 tm-color-primary tm-post-title"></h2>
+                    <p class="tm-mb-40">{{post_detail1.title}} posted by {{post_detail1.name}}</p>
+                    <p>{{post_detail1.description}}</p>
+                    <span class="d-block text-right tm-color-primary"></span>
+                </div>
+
+                
+    <footer class="row tm-row">
+        <div class="col-md-6 col-12 tm-color-gray">
+            For Update: <a rel="nofollow" target="_parent" href="{% url 'main_app:update_post' post_detail1.id %}" class="tm-external-link">Update</a>
+        </div>
+        <div class="col-md-6 col-12 tm-color-gray">
+            For Delete: <a rel="nofollow" target="_parent" href="{% url 'main_app:delete_post' post_detail1.id %}" class="tm-external-link">Delete</a>
+        </div>
+        <div class="col-md-6 col-12 tm-color-gray tm-copyright">
+            {{post_detail1.date}}
+        </div>
+    </footer>
+
+    <div class="container d-flex flex-column gap-3">
+        <h2>Reviews</h2>
+        {% for comment in comments %}
+    
+        <div class="d-flex flex-column p-4 border border-1 rounded-5 gap-1">
+            <h6>{{comment.name}}</h6>
+            <p>{{comment.content}}</p>
+            <p>{{comment.created_at}}</p>
+        </div>
+    
+        {% endfor %}
+    
+    </div>
+</main>
+
+
+<div class="container-fluid">
+    <main class="tm-main">
+        <div class="row tm-row tm-mb-120">
+            <div class="col-12">
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Add Review</h2>
+            </div>
+            <div class="col-lg-7 tm-contact-left">
+                <form method="POST" action="{% url 'main_app:add_review' post_detail1.id %}" class="mb-5 ml-auto mr-0 tm-contact-form" enctype="multipart/form-data">   
+                    {% csrf_token %}
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control mr-0 ml-auto" name="name"  type="text" required>                            
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Content</label>
+                        <div class="col-sm-9">
+                            <input class="form-control mr-0 ml-auto" name="content" type="text" required>                            
+                        </div>
+                    </div>
+            
+                    <div class="form-group row text-right">
+                        <div class="col-12">
+                            <button class="tm-btn tm-btn-primary tm-btn-small">add comment</button>                        
+                        </div>                            
+                    </div>                                
+                </form>
+            </div>
+
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/templatemo-script.js"></script>
+</body>
+</html>
+{%endblock%}
