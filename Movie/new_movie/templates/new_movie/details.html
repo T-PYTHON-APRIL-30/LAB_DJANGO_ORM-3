@@ -1,0 +1,66 @@
+{% extends 'new_movie/home.html'%}
+
+{% block page %}  Details Page {% endblock %}
+
+{% block process%}
+
+<div class="container d-flex flex-column gap-3 align-items-center ">
+    <h1> {{movie_d.title}} </h1>
+
+    <img src="{{ movie_d.image.url }}" class="rounded-5" style=" height: 60vh; width: 90vh;" alt="...">
+    
+    <p> {{movie_d.content}} </p>
+
+    <p>is published? {{movie_d.is_published}} </p>
+
+    <p>publish date {{movie_d.publish_date}} </p>
+
+    <div class="justify-content-center mb-3">
+        <a class="btn btn-warning" style="width: 130PX;" type="button" href="{% url 'new_movie:update_page' movie_d.id %}"> Update</a>
+    <a class="btn btn-danger" style="width: 130PX;" type="button" href="{% url 'new_movie:delete_page' movie_d.id %}"> Delete</a>
+    </div>
+
+    <h4 style="align-self: self-start;">Comments</h4>
+
+    
+        <div class="card d-flex p-2 align-self-start mb-3">
+            {% for comment in comments %}
+            <div class="card rounded-5 mb-1"  >
+                
+                <div class="card-body" >
+                    <h5 class="card-title">{{ comment.name }}</h5>
+                
+                    <p class="card-text">{{comment.comment}} </p>
+                    <p class="card-text">Created at: {{ comment.created_at }} </p>
+                
+                </div>
+                
+            </div>
+            {%endfor%}
+        </div>
+        
+    
+    <div class="card d-flex  p-2 align-self-start" style="padding-left: 0;">
+        <form action="{% url 'new_movie:review' movie_d.id %}" method="POST" style="text-align: start;">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your name" name="name">
+                
+            </div>
+        
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="exampleFormControlInput1" placeholder="comment" name="comment"></textarea>
+                
+            </div>
+    
+            <input type="submit" value="Add comment" class="btn btn-primary" />
+    
+        </form>
+
+    </div>
+    
+    
+</div>
+   
+
+{% endblock %}

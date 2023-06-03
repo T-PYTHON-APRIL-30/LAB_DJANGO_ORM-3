@@ -1,0 +1,48 @@
+{% extends 'new_movie/home.html'%}
+
+{% block page %}  Update Page {% endblock %}
+
+{% block process%}
+
+<form action="{% url 'new_movie:update_page' movie_u.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input value="{{movie_u.title}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="title" name="title"/>
+        
+    </div>
+
+    <div class="form-floating mb-3">
+        <textarea class="form-control" id="exampleFormControlInput1" placeholder="content" name="content"> {{movie_u.content}} 
+        </textarea>
+        
+    </div>
+
+    <div class="form-floating mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Choose Image</label>
+        <input type="file" name="image" class="form-control" />
+        
+    </div>
+    
+    <div class="form-floating">
+        <label for="floatingSelectDisabled">Is Published? </label>
+        <select class="form-select" id="floatingSelectDisabled" aria-label="Floating label disabled select example" name="is_published" >
+        <option value="True">published</option>
+        <option value="False">unpublished</option>
+        
+        </select>
+        
+    </div>
+
+    <div class="form-floating mb-3">
+        <input value="{{iso_date}}" type="datetime-local"  id="floatingSelectDisabled" name="publish_date"/>
+        
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" value=" Update " class="btn btn-warning"/>
+    </div>
+    
+
+</form>
+    
+          {% endblock %}

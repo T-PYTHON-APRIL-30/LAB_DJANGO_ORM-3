@@ -1,0 +1,28 @@
+{% extends 'new_movie/home.html'%}
+
+{% block page %} <h2>Search results for <span class="text-primary">{{request.GET.search}}</span></h2> {% endblock %}
+
+{% block process%}
+
+<div class="row justify-content-center">
+    {% for movie in movie_s %}
+    <div class="col-4 g-3" >
+
+        <div class="card rounded-5" >
+            <img src="{{ movie.image.url }}" class="card-img-top rounded-5" alt="...">
+            <div class="card-body" >
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text" style=" overflow: scroll; height: 80px; text-overflow: ellipsis;">{{movie.content}}</p>
+            <p class="card-text">is published? {{movie.is_published}}</p>
+            <p class="card-text">publish date {{movie.publish_date}}</p>
+            <a class="btn btn-primary" type="button" href="{% url 'new_movie:detail_page' movie.id %}"> Details</a>
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
