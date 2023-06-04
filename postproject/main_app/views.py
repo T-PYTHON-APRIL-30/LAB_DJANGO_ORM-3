@@ -31,8 +31,8 @@ def update_post(request:HttpRequest,post_id):
             update_detail1.description = request.POST["description"]
             update_detail1.date = request.POST["date"]
             update_detail1.save()
-            return redirect("main_app:post_detail", post_id = update_detail1.id)
-    return render (request,"main_app/update_post.html",{"update_detail1" : update_detail1,"iso_date" : iso_date})
+            return redirect("main_app:post_detail", post_id = post_id)
+    return render (request,"main_app/update_post.html",{"iso_date" : iso_date})
 
 
 def delete_post(request:HttpRequest, post_id):
@@ -58,6 +58,6 @@ def add_review(request:HttpRequest, post_id):
         new_review.save()
 
     
-    return redirect("main_app:post_detail", post_id=post_id)from django.shortcuts import render
+    return redirect("main_app:post_detail", post_id=post_id)
 
 # Create your views here.

@@ -17,3 +17,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from . import settings
+from . import views
+
+app_name='main_app'
+
+urlpatterns=[
+
+    path('',views.post_list, name='post_list'),
+    path('add/',views.post_add, name='post_add'),
+    path("",views.post_list,name='post_list'),
+    path('new/',views.post_new, name='post_new'),
+    path('post/int:pk>',views.post_detail,name='post_detail'),
+    path('post/<int:pk>/delete',views.post_delete,name='post_delete'),
+    path('search/',views.serach_post,name='serach_post'),
+    path('update/<post_id>',views.update_post,name='update'),
+
+
+]

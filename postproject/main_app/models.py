@@ -15,3 +15,4 @@ class Review(models.Model):
     name = models.CharField(max_length=60)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    image=models.ImageField(upload_to="/imgs")

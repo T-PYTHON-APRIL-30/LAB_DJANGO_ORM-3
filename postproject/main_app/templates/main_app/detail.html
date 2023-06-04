@@ -1,0 +1,13 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}{{post.title}}{% endblock%}
+
+{% block content %}
+<div class="container">
+    <h1>{{post.title}}</h1>
+    <a href="{% url 'main_app:update' post.id %}" class="btn btn-warning">update post</a>
+    <a href="{% url 'main_app:delete' post.id %}" class="btn btn-danger">Delete post</a>
+    <p>{{post.description}}</p>
+</div>
+    
+{% endblock %}
