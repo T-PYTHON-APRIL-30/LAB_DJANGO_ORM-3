@@ -8,7 +8,7 @@ class Post(models.Model):
     content = models.TextField()
     is_published = models.BooleanField()
     image = models.ImageField(upload_to="images/", default="images/default.jpg")
-    publish_date = models.DateTimeField()
+    publish_date = models.DateTimeField(auto_now_add=True)
     
 
 class Review(models.Model):

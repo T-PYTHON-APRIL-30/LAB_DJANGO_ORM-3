@@ -7,9 +7,12 @@ from .models import Post,Review
 def add_blog(request:HttpRequest):
 
     if request.method == "POST":
-        new_post = Post(title=request.POST["title"], content=request.POST["content"], is_published=request.POST["is_published"], publish_date=request.POST["publish_date"], image=request.FILES["image"])
+        new_post = Post(title=request.POST["title"], content=request.POST["content"], is_published=request.POST["is_published"])
+        if "image" in request.FILES:
+            new_post.image = request.FILES["image"]
         new_post.save()
-        return redirect("main_app:index.html")
+        return redirect("main_app:index_page")
+    
     return render(request, "main_app/add_blog.html")
 
 
@@ -78,7 +81,7 @@ def delete_post(request:HttpRequest, post_id):
 
 def delete(request:HttpRequest):
 
-    return render(request,"main_app/index.html")
+    return render(request,"main_app/delete_done.html")
 
 
 def search_page(request:HttpRequest):
